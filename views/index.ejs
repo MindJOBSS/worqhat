@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat App</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="chat-container">
+      <h2 class="chat-header">What-If Future</h2>
+
+      <div class="chat-messages" id="chat-messages">
+        <div class="message gray-bg">
+          <div class="message-sender">Bot</div>
+          <div class="message-text">
+            Hey there, User, let's start our session
+          </div>
+          <div class="message-timestamp">
+            <%= new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) %>
+          </div>
+        </div>
+
+        <% if (locals && inputStream && inputStream.length) { %>
+          <% inputStream.forEach((input) => { %>
+            <div class="message <%= input.sender === 'User' ? 'blue-bg' : 'gray-bg' %>">
+              <div class="message-sender"><%= input.sender %></div>
+              <% if (input.input) { %>
+                <div class="message-text"><%= input.input %></div>
+              <% } %>
+              <% if (input.input_img) { %>
+                <img src="<%= input.input_img %>" alt="picture of the role">
+              <% } %>
+              <% if (input.input1) { %>
+                <div class="message-text"><%= input.input1 %></div>
+              <% } %>
+              <div class="message-timestamp">
+                <%= new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) %>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+
+      <form class="chat-input-form" id="chat-form" action="/send" method="post">
+        <input
+          type="text"
+          class="chat-input"
+          id="user-input"
+          name="userInput"
+          required
+          placeholder="Type here, User..."
+        />
+        <button type="submit" class="button send-button">Send</button>
+      </form >
+
+      <form action="/clear" method="delete">
+        <button type="button" class="button clear-chat-button" id="clear-chat">
+            Clear Chat
+          </button>
+      </form>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
