@@ -34,6 +34,18 @@
               <% if (input.input1) { %>
                 <div class="message-text"><%= input.input1 %></div>
               <% } %>
+              <% if (input.input2) { %>
+                <div class="message-text"> Duration: <%= input.input2 %></div>
+              <% } %>
+              <% if (input.input3) { %>
+                <div class="message-text"> Resources:
+                  <ul>
+                    <% input.input3.forEach(function(item) { %>
+                      <li><%= item %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+              <% } %>
               <div class="message-timestamp">
                 <%= new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) %>
               </div>
